@@ -4,16 +4,6 @@ import Boulders from '.';
 import { pointsAccounting } from '/imports/utils/methods';
 
 Meteor.methods({
-  'boulders.create': function createBoulders(number) {
-
-    for (let i=0; i<number; i++) {
-      Boulders.insert({
-        id: i,
-        men: [],
-        women: []
-      });
-    }
-  },
   'boulders.updateBoulder': function updateBoulder({idBoulder, idClimber, methods, kind, push}) {
     
     const response = Boulders.update({id: idBoulder}, { [push ? "$push" : "$pull"]: { [kind]: idClimber } });

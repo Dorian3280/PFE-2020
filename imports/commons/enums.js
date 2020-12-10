@@ -24,12 +24,12 @@ export const FORMATS = [
 export const KINDS = [
   {
     "label": "Homme",
-    "value": "men",
+    "value": 1,
     "role": "Master"
   },
   {
     "label": "Femme",
-    "value": "women",
+    "value": 2,
     "role": "Master"
   },
 ];

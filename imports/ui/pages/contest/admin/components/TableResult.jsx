@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
 
-import Table from '../../../components/Table';
-import Thead from '../../../components/Thead';
-import Tbody from '../../../components/Tbody';
-import Tr from '../../../components/Tr';
-import Td from '../../../components/Td';
+import Table from '../../../../elements/Table';
+import Thead from '../../../../elements/Thead';
+import Tbody from '../../../../elements/Tbody';
+import Tr from '../../../../elements/Tr';
+import Td from '../../../../elements/Td';
 
 const TableResult = (props) => {
 

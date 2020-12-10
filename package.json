@@ -17,6 +17,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "rsuite": "^4.8.4",
+    "simpl-schema": "^1.10.2",
     "styled-components": "^5.2.0"
   },
   "meteor": {

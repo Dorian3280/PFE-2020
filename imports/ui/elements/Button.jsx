@@ -9,6 +9,7 @@ const StyledButton = styled(CustomizeButton)`
     height: 70px;
     transition: 0.25s;
     border: none;
+    border-radius: 10px;
     cursor: pointer;
     color: inherit;
     font-family: inherit;

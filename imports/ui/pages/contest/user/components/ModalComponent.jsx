@@ -5,15 +5,16 @@ import { Button } from 'rsuite';
 
 const ModalComponent = (props) => {
 
+    const { showModal, handleChange, handleKeep } = props
     return (
         <div className="modal-container">
-            <Modal backdrop="static" show={props.showModal} size="xs">
+            <Modal backdrop="static" show={showModal} size="xs">
             <Modal.Body>
             Une personne est déjà prénommée ainsi, que souhaitez-vous faire ?
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.handleChange} block appearance="primary">Changer votre nom ou/et votre prénom</Button>
-                <Button onClick={props.handleKeep} block appearance="primary">Rendre unique votre identité avec un numéro</Button>
+                <Button onClick={handleChange} block appearance="primary">Changer votre nom ou/et votre prénom</Button>
+                <Button onClick={handleKeep} block appearance="primary">Rendre unique votre identité avec un numéro</Button>
             </Modal.Footer>
             </Modal>
         </div>

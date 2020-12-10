@@ -4,16 +4,16 @@ import { Redirect } from 'react-router-dom';
 
 import React, { useState, useCallback, useEffect, useMemo } from 'react';
 
-import Background from '../components/Background';
-import BackgroundOpacity from '../components/BackgroundOpacity';
-import ContestInformation from '../components/ContestInformation';
-import Flex from '../components/Flex';
-import Form from '../components/Form';
-import BigButton from '../components/BigButton';
-import Control from '../components/Control';
-import Logout from '../components/Logout';
-import Chevron from '../components/Chevron';
-import Span from '../components/Span';
+import Background from '../elements/Background';
+import BackgroundOpacity from '../elements/BackgroundOpacity';
+import ContestInformation from '../elements/ContestInformation';
+import Flex from '../elements/Flex';
+import Form from '../elements/Form';
+import BigButton from '../elements/BigButton';
+import Control from '../elements/Control';
+import Logout from '../elements/Logout';
+import Chevron from '../elements/Chevron';
+import Span from '../elements/Span';
 
 import { Tooltip, Whisper } from 'rsuite';
 
@@ -22,7 +22,7 @@ var moment = require('moment');
 const Home = ( {history} ) => {
 
     const [error, setError] = useState("");
-    const [hostName, setHostName] = useState('');
+    const [hostName, setHostName] = useState('azer');
     const [format, setFormat] = useState(1);
     const [methods, setMethods] = useState(1);
     const [nbrBoulder, setNbrBoulder] = useState(30);
@@ -52,17 +52,16 @@ const Home = ( {history} ) => {
             fetch("https://www.uuidtools.com/api/generate/v1")
                 .then((res) => res.json())
                 .then((code) => {
-                    const data = {
+                    Meteor.callWithPromise('contest.create', {
                         hostName,
                         nbrBoulder,
                         code: code[0],
                         methods,
                         startAt,
                         createdAt: new Date(),
-                    }
-                    Meteor.call('contest.create', data);
-                    Meteor.call('boulders.create', nbrBoulder);
-                    setUrl(`contest&id=${code}`);
+                    })
+                    .then(() => setUrl(`contest&id=${code}`))
+                    .catch((error) => console.log(error));
                 });
         } else {
             setError("La création de compétition sous ce format est toujours en cours de développement")
@@ -87,7 +86,7 @@ const Home = ( {history} ) => {
                             <Flex fld="column" jcc="space-evenly" aic="center">
                                 <Control type="text" onChange={handleChangeHostName} width="80%" size="lg" value={hostName} name="hostName" placeholder="Nom de la salle"/>
                                 <Control type="select" onChange={handleChangeFormat} width="80%" size="lg" value={format} name="format"/>
-                                <Control type="select" onChange={handleChangeMethods} width="80%" size="lg" value={methods} name="methodes"/>
+                                <Control type="select" onChange={handleChangeMethods} width="80%" size="lg" value={methods} name="methods"/>
                                 <Whisper trigger="active" placement="top" speaker={<Tooltip>Nombres de blocs</Tooltip>}>
                                     <Control type="number" onChange={handleChangeNbrBoulder} width="80%" size="lg" name="nbrBoulder" value={nbrBoulder} min={5} max={150}/>
                                 </Whisper>

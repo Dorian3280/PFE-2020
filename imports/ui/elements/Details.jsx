@@ -5,8 +5,8 @@ const Details = styled.div`
     width: 100vw;
     position: fixed;
     top: 0;
-    transform: ${({hidden}) => hidden ? 'translateX(100%)' : 'translateX(0)'};
-    transition: 1s;
+    right: ${({rightSide}) => rightSide ? '-100%' : '0'};
+    transition: 0.5s;
     background: #404040;
 `
 

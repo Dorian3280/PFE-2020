@@ -2,13 +2,13 @@ import { Meteor } from 'meteor/meteor';
 import React, { useCallback, useState, useMemo, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import Background from '../../../components/Background';
-import UserInformations from '../../../components/UserInformations';
-import Flex from '../../../components/Flex';
-import Control from '../../../components/Control';
-import Span from '../../../components/Span';
-import CenterFlex from '../../../components/CenterFlex';
-import ModalComponent from '../../../components/ModalComponent';
+import Background from '../../../elements/Background';
+import UserInformations from '../../../elements/UserInformations';
+import Flex from '../../../elements/Flex';
+import Control from '../../../elements/Control';
+import Span from '../../../elements/Span';
+import CenterFlex from '../../../elements/CenterFlex';
+import ModalComponent from './components/ModalComponent';
 
 import { Button } from 'rsuite';
 import { Loader } from 'rsuite';
@@ -22,7 +22,7 @@ const User = (props) => {
 
     const [lastName, setLastName] = useState('azer');
     const [firstName, setFirstName] = useState('azer');
-    const [kind, setKind] = useState("men");
+    const [kind, setKind] = useState(1);
     const [email, setEmail] = useState('');
     const [id, setId] = useState('');
     const { url } = props.match;

@@ -2,23 +2,23 @@ import { Accounts } from 'meteor/accounts-base';
 
 import React, { useCallback, useState } from 'react';
 
-import Background from '../components/Background';
-import RegisterForm from '../components/RegisterForm';
-import RegisterChoice from '../components/RegisterChoice';
-import ControlContainer from '../components/ControlContainer';
-import Flex from '../components/Flex';
-import Control from '../components/Control';
-import Image from '../components/Image';
-import Button from '../components/Button';
-import CenterFlex from '../components/CenterFlex';
-import Grid from '../components/Grid';
-import Span from '../components/Span';
+import Background from '../elements/Background';
+import RegisterForm from '../elements/RegisterForm';
+import RegisterChoice from '../elements/RegisterChoice';
+import ControlContainer from '../elements/ControlContainer';
+import Flex from '../elements/Flex';
+import Control from '../elements/Control';
+import Image from '../elements/Image';
+import Button from '../elements/Button';
+import CenterFlex from '../elements/CenterFlex';
+import Grid from '../elements/Grid';
+import Span from '../elements/Span';
 
 const Register = ( {history} ) => {
 
     const [error, setError] = useState("");
     const [signIn, setSignIn] = useState(true);
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPwd, setConfirmPwd] = useState('');
 
@@ -26,7 +26,7 @@ const Register = ( {history} ) => {
         event.preventDefault();
 
         if (signIn) {
-            Meteor.loginWithPassword({ email }, password, (error) => {
+            Meteor.loginWithPassword({ username }, password, (error) => {
                 if (error) {
                     setError(Meteor.translateToFrench(error.reason))
                 } else {
@@ -35,7 +35,7 @@ const Register = ( {history} ) => {
             });
         } else {
             if (password === confirmPwd) {
-                Accounts.createUser({email, password}, (error) => {
+                Accounts.createUser({username, password}, (error) => {
                     if (error) {
                         setError(Meteor.translateToFrench(error.reason))
                     } else {
@@ -46,9 +46,9 @@ const Register = ( {history} ) => {
                 setError("Les mots de passe ne correspondent pas")
             }
         }
-    }, [email, password, confirmPwd, signIn]);
+    }, [username, password, confirmPwd, signIn, error]);
 
-    const handleChangeEmail = useCallback((value) => setEmail(value), [email]);
+    const handleChangeUsername = useCallback((value) => setUsername(value), [username]);
     const handleChangePassword = useCallback((value) => setPassword(value), [password]);
     const handleChangeConfirmPassword = useCallback((value) => setConfirmPwd(value), [confirmPwd]);
 
@@ -56,14 +56,14 @@ const Register = ( {history} ) => {
         <Background page="register">
             <RegisterForm onSubmit={handleSubmit}>
                 <Flex contain="true" fld="row"> 
-                    <RegisterChoice onClick={() => setSignIn(true)} actif={signIn}><CenterFlex>CONNEXION</CenterFlex></RegisterChoice>
-                    <RegisterChoice onClick={() => setSignIn(false)} actif={!signIn}><CenterFlex>INSCRIPTION</CenterFlex></RegisterChoice>
+                    <RegisterChoice onClick={() => {setSignIn(true); setError("")}} actif={signIn}><CenterFlex>CONNEXION</CenterFlex></RegisterChoice>
+                    <RegisterChoice onClick={() => {setSignIn(false); setError("")}} actif={!signIn}><CenterFlex>INSCRIPTION</CenterFlex></RegisterChoice>
                 </Flex>
                 <Flex grow="1" fld="column" jcc="center" aic="center">
                     <ControlContainer>
                         <Grid type="columns" size={['80px', '1fr']}>
-                            <Image height="50" width="50" src={`../../../images/icons/email.png`}/>
-                            <Control onChange={handleChangeEmail} dataType="text" value={email} placeholder="Email"/>
+                            <Image height="50" width="50" src={`../../../images/icons/username.png`}/>
+                            <Control onChange={handleChangeUsername} dataType="text" value={username} placeholder="Nom d'utilisateur"/>
                         </Grid>
                     </ControlContainer>
                     <ControlContainer>

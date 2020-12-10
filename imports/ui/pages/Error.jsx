@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Background from '../components/Background';
-import CenterFlex from '../components/CenterFlex';
-import Span from '../components/Span';
+import Background from '../elements/Background';
+import CenterFlex from '../elements/CenterFlex';
+import Span from '../elements/Span';
 
 const Error = (props) => {
 

@@ -23,7 +23,7 @@ const Select = ({name, width, ...props}) => {
         return FORMATS;
       case 'kind': 
       return KINDS;
-      case 'methodes': 
+      case 'methods': 
       return METHODS;
       default:
         return [];

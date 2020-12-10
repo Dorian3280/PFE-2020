@@ -1,12 +1,26 @@
 import { Meteor } from 'meteor/meteor';
 import Contest from '.';
+import Boulders from '../boulders/index';
 
 Meteor.methods({
 
-  'contest.create': function createContest(data) {
+  'contest.create': function createContest({hostName, nbrBoulder, code, methods, startAt, createdAt}) {
+    
+    for (let i=0; i<nbrBoulder; i++) {
+      Boulders.insert({
+        id: i,
+        men: [],
+        women: []
+      })
+    } 
+
     return Contest.insert({
-      ...data,
-      createdAt: new Date(),
+      hostName,
+      nbrBoulder,
+      code,
+      methods,
+      startAt,
+      createdAt,
     });
   },
 

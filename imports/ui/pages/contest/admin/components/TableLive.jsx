@@ -1,11 +1,11 @@
 import React, { useMemo } from "react";
 
-import Table from '../../../components/Table';
-import Thead from '../../../components/Thead';
-import Tbody from '../../../components/Tbody';
-import Tr from '../../../components/Tr';
-import Td from '../../../components/Td';
-import Input from '../../../components/Input';
+import Table from '../../../../elements/Table';
+import Thead from '../../../../elements/Thead';
+import Tbody from '../../../../elements/Tbody';
+import Tr from '../../../../elements/Tr';
+import Td from '../../../../elements/Td';
+import Input from '../../../../elements/Input';
 
 const TableLive = (props) => {
 
@@ -19,7 +19,7 @@ const TableLive = (props) => {
                         <Td width="120">Nom</Td>
                         <Td width="120">Prenom</Td>
                         <Td width="60">Points</Td>
-                        {Array.from(Array(nbrBoulder).keys()).map((id) => <Td key={id}>{kind === 'men' ? 'M' : 'W'}{id+1}</Td>)}
+                        {Array.from(Array(nbrBoulder).keys()).map((id) => <Td key={id}>{kind === 1 ? 'M' : 'W'}{id+1}</Td>)}
                     </Tr>
                 </Thead>
                 <Tbody>{climbers[kind].map((climber) => 

@@ -3,24 +3,19 @@ import { useTracker } from 'meteor/react-meteor-data';
 
 import React, { useState, useCallback, useEffect } from "react";
 
-import TableLive from './TableLive';
-import TableResult from './TableResult';
+import TableLive from './components/TableLive';
+import TableResult from './components/TableResult';
+import Options from './components/Options';
 
-import Background from '../../../components/Background';
-import BackgroundOpacity from '../../../components/BackgroundOpacity';
-import GridContest from '../../../components/GridContest';
-import MainEvent from '../../../components/MainEvent';
-import KindChoice from '../../../components/KindChoice';
-import Span from '../../../components/Span';
-import Flex from '../../../components/Flex';
-import CenterFlex from '../../../components/CenterFlex';
-import Button from '../../../components/Button';
-import OptionsContainer from '../../../components/OptionsContainer';
-import OptionsButton from '../../../components/OptionsButton';
-import OptionsMenu from '../../../components/OptionsMenu';
-import OptionsHover from '../../../components/OptionsHover';
-
-import { tablesToExcel } from '/imports/utils/methods';
+import Background from '../../../elements/Background';
+import BackgroundOpacity from '../../../elements/BackgroundOpacity';
+import GridContest from '../../../elements/GridContest';
+import MainEvent from '../../../elements/MainEvent';
+import KindChoice from '../../../elements/KindChoice';
+import Span from '../../../elements/Span';
+import Flex from '../../../elements/Flex';
+import CenterFlex from '../../../elements/CenterFlex';
+import Button from '../../../elements/Button';
 
 import Climbers from '/imports/api/climbers/index';
 import Boulders from '/imports/api/boulders/index';
@@ -31,9 +26,9 @@ const ContestLiveSolo = (props) => {
 
   const [ contest, setContest ] = useState({});
   const [ userLink, setUserLink ] = useState("");
-  const [ climbers, setClimbers ] = useState({ men: [], women: [] });
-  const [ boulders, setBoulders ] = useState({ men: [], women: [] });
-  const [ kindActive, setKindActive ] = useState("men");
+  const [ climbers, setClimbers ] = useState({ 1: [], 2: [] });
+  const [ boulders, setBoulders ] = useState({ 1: [], 2: [] });
+  const [ kind, setKind ] = useState(1);
   const [ optionsActive, setOptionsActive ] = useState(false);
 
   const { code } = props.match.params;
@@ -49,7 +44,7 @@ const ContestLiveSolo = (props) => {
     .then(res => {
       setContest(res);
       setUserLink(`contest_${res.hostName}&${res.code}`)
-    }).catch( err => console.log(err.message))
+    }).catch(err => console.log(err.message))
   }, []);
 
   const [readyTrackerClimbers, trackerClimbers] = useTracker(() => {
@@ -73,8 +68,8 @@ const ContestLiveSolo = (props) => {
   useEffect(() => {
     if (readyTrackerClimbers) {
       setClimbers({
-        men: trackerClimbers.filter(climber => climber.kind == 'men'),
-        women: trackerClimbers.filter(climber => climber.kind == 'women')
+        1: trackerClimbers.filter(climber => climber.kind === 1),
+        2: trackerClimbers.filter(climber => climber.kind === 2)
       })
     }
   }, [trackerClimbers, readyTrackerClimbers]);
@@ -95,7 +90,7 @@ const ContestLiveSolo = (props) => {
 
   const successBoulder = useCallback((event) => {
 
-    //if (moment().toDate() < contest.startAt) {console.log('Le contest n\'a pas commencé'); return false}
+    //if (moment().toDate() < contest.startAt) return false
 
     const idBoulder = parseInt(event.target.attributes.id.value);
     const idClimber = event.target.parentNode.attributes.id.value;
@@ -111,44 +106,28 @@ const ContestLiveSolo = (props) => {
     <>
       <Background page="contest"></Background>
       <BackgroundOpacity></BackgroundOpacity>
-      <OptionsContainer active={optionsActive}>
-        <OptionsButton onClick={() => setOptionsActive(!optionsActive)} active={optionsActive}>
-          <Flex jcc="space-evenly" aic="center">
-            <Span size="1.8">{optionsActive ? '↓' : `↑`}</Span>
-            <Span size="1.8">Options</Span>
-            <Span size="1.8">{optionsActive ? '↓' : '↑'}</Span>
-          </Flex>
-        </OptionsButton>
-        <OptionsHover onClick={() => setOptionsActive(!optionsActive)} active={optionsActive}></OptionsHover>
-        <OptionsMenu>
-          <Flex fld="column" jcc="center" aic="center" rGap="10">
-            <Span size="1.3">En solo</Span>
-            <Span size="1.3">{contest.nbrBoulder} blocs</Span>
-            <Span size="1.3">{contest.hostName}</Span>
-          </Flex>
-          <Flex fld="column" jcc="center" aic="center" rGap="10">
-            <Span size="1.5">Règles du Contest</Span>
-            <Span size="1.5"><a target="_blank" href={`https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=https://live-contest.com/${userLink}`}>Lien QR Code</a></Span>    
-            <button id="test-table-xls-button" onClick={() => tablesToExcel(['men-result', 'women-result'], ['men', 'result'], 'myfile.xls')}>Export to Excel</button>
-          </Flex>
-        </OptionsMenu>
-      </OptionsContainer>
+      <Options
+        setOptionsActive={setOptionsActive}
+        optionsActive={optionsActive}
+        contest={contest}
+        userLink={userLink}
+      ></Options>
       <GridContest>
         <Flex fld="column" aic="center" style={{borderRight: '1px solid lightGrey'}}>
           <Span marginY="20" size="1.8">Résultats Femmes</Span>
-          <TableResult kind="women" climbers={climbers['women']}/>
+          <TableResult kind={2} climbers={climbers[2]}/>
         </Flex>
         <MainEvent>
           <Flex fld="column" aic="center">
             <Flex width="80%" height="12%" jcc="space-evenly" aic="center">
               <Flex contain="true" fld="row"> 
-                  <KindChoice onClick={() => setKindActive('men')} actif={kindActive === "men"}><CenterFlex>HOMMES</CenterFlex></KindChoice>
-                  <KindChoice onClick={() => setKindActive('women')} actif={kindActive === "women"}><CenterFlex>FEMMES</CenterFlex></KindChoice>
+                  <KindChoice onClick={() => setKind(1)} actif={kind === 1}><CenterFlex>HOMMES</CenterFlex></KindChoice>
+                  <KindChoice onClick={() => setKind(2)} actif={kind === 2}><CenterFlex>FEMMES</CenterFlex></KindChoice>
               </Flex>
-              <Button onClick={() => addClimbers(kindActive)}>Ajouter un{kindActive === 'men' ? ' grimpeur' : 'e grimpeuse'}</Button>
+              <Button onClick={() => addClimbers(kind)}>Ajouter un{kind === 1 ? ' grimpeur' : 'e grimpeuse'}</Button>
             </Flex>
             <TableLive
-              kind = {kindActive}
+              kind = {kind}
               nbrBoulder = {contest.nbrBoulder}
               climbers = {climbers}
               setClimberName = {setClimberName}
@@ -158,7 +137,7 @@ const ContestLiveSolo = (props) => {
         </MainEvent>
         <Flex fld="column" aic="center" style={{borderLeft: '1px solid lightGrey'}}>
           <Span marginY="20" size="1.8">Résultats Hommes</Span>
-          <TableResult kind="men" climbers={climbers['men']}/>
+          <TableResult kind={1} climbers={climbers[1]}/>
         </Flex>
       </GridContest>
     </>
