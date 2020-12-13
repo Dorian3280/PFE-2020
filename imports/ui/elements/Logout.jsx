@@ -5,11 +5,9 @@ const CustomizeButton = ({ className, children, ...props }) => <button {...props
 
 const StyledButton = styled(CustomizeButton)`
     position: absolute;
-    bottom: 50px;
-    right: 100px;
-    margin: 20px;
-    width: 250px;
-    height: 60px;
+    top: 30px;
+    right: 50px;
+    padding: 20px;
     background: rgb(255, 0, 0);
     border-radius: 5px;
     transition: 0.25s;
@@ -17,7 +15,7 @@ const StyledButton = styled(CustomizeButton)`
     cursor: pointer;
     color: inherit;
     font-family: inherit;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     &:hover {
         background: rgb(190, 0, 0);
     }

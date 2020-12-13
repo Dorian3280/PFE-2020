@@ -10,12 +10,13 @@
   "dependencies": {
     "@babel/runtime": "^7.8.3",
     "bcrypt": "^5.0.0",
+    "dayjs": "^1.9.7",
     "meteor-node-stubs": "^1.0.0",
-    "moment": "^2.29.1",
     "ncrypt-js": "^2.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
+    "react-toastify": "^6.2.0",
     "rsuite": "^4.8.4",
     "simpl-schema": "^1.10.2",
     "styled-components": "^5.2.0"

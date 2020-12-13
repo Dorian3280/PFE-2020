@@ -1,11 +1,11 @@
-import React from 'react';
 import styled from 'styled-components';
 
 const ContestInformation = styled.div`
     width: 500px;
     height: 400px;
     margin: 20px;
-    border: 3px solid #000;
+    background: rgb(0, 0, 0, 0.4);
+    border-radius: 5%;
     font-size: 32px;
 `;
 

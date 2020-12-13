@@ -6,8 +6,8 @@ const CustomizeButton = ({ className, children, ...props }) => <button {...props
 
 const StyledButton = styled(CustomizeButton)`
     margin: 20px;
-    width: 600px;
-    height: 200px;
+    width: 500px;
+    height: 150px;
     background: #F4820F;
     border-radius: 10px;
     transition: 0.25s;
@@ -15,7 +15,7 @@ const StyledButton = styled(CustomizeButton)`
     cursor: pointer;
     color: inherit;
     font-family: inherit;
-    font-size: 3rem;
+    font-size: 2.5rem;
     &:hover {
         background: #b45a00;
     }

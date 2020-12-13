@@ -9,6 +9,7 @@ import UserRegister from './pages/contest/user/UserRegister';
 import UserHome from './pages/contest/user/UserHome';
 
 import 'rsuite/dist/styles/rsuite-default.css';
+import 'react-toastify/dist/ReactToastify.css';
 import '../../public/main.css';
 
 const App = () => (

@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 const ListingFlex = styled.div`
-    display: flex;
-    width: 70%;
+    display: ${({show}) => show ? 'flex' : 'none'};
     flex-wrap: wrap;
     justify-content: center;
 `;

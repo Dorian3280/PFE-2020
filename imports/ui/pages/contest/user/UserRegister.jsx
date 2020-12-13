@@ -15,13 +15,12 @@ import { Loader } from 'rsuite';
 
 const User = (props) => {
     
-
     const [error, setError] = useState("");
     const [loader, setLoader] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
-    const [lastName, setLastName] = useState('azer');
-    const [firstName, setFirstName] = useState('azer');
+    const [lastName, setLastName] = useState('');
+    const [firstName, setFirstName] = useState('');
     const [kind, setKind] = useState(1);
     const [email, setEmail] = useState('');
     const [id, setId] = useState('');

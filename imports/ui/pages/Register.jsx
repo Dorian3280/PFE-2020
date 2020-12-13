@@ -56,8 +56,8 @@ const Register = ( {history} ) => {
         <Background page="register">
             <RegisterForm onSubmit={handleSubmit}>
                 <Flex contain="true" fld="row"> 
-                    <RegisterChoice onClick={() => {setSignIn(true); setError("")}} actif={signIn}><CenterFlex>CONNEXION</CenterFlex></RegisterChoice>
-                    <RegisterChoice onClick={() => {setSignIn(false); setError("")}} actif={!signIn}><CenterFlex>INSCRIPTION</CenterFlex></RegisterChoice>
+                    <RegisterChoice onClick={() => {setSignIn(true); setError("")}} actif={signIn}><CenterFlex>SE CONNECTER</CenterFlex></RegisterChoice>
+                    <RegisterChoice onClick={() => {setSignIn(false); setError("")}} actif={!signIn}><CenterFlex>S'INSCRIRE</CenterFlex></RegisterChoice>
                 </Flex>
                 <Flex grow="1" fld="column" jcc="center" aic="center">
                     <ControlContainer>
@@ -79,7 +79,7 @@ const Register = ( {history} ) => {
                         </Grid>
                     </ControlContainer> : ''}
                     <Span size="1" color="red">{error}</Span>
-                    <Button type='submit'>{signIn ? 'LOG IN' : 'SIGN UP'}</Button>
+                    <Button type='submit'>{signIn ? 'Je me connecte' : 'Je m\'inscris'}</Button>
                 </Flex>
             </RegisterForm>
         </Background>

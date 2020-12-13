@@ -19,7 +19,7 @@ import DetailsComponent from './components/DetailsComponent';
 
 import Climbers from '/imports/api/climbers/index';
 
-var moment = require('moment');
+var dayjs = require('dayjs');
 
 const Register = (props) => {
 
@@ -67,9 +67,9 @@ const Register = (props) => {
 
     const successBoulder = useCallback((event) => {
 
-        /* if (moment().toDate() < contest.startAt) {
+        if (dayjs().toDate() < contest.startAt) {
             return false
-        } */
+        }
 
         const idBoulder = parseInt(event.currentTarget.attributes.id.value);
         const push = !climber.boulders.includes(idBoulder);

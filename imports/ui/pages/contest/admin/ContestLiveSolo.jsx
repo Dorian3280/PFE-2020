@@ -20,7 +20,7 @@ import Button from '../../../elements/Button';
 import Climbers from '/imports/api/climbers/index';
 import Boulders from '/imports/api/boulders/index';
 
-var moment = require('moment');
+var dayjs = require('dayjs');
 
 const ContestLiveSolo = (props) => {
 
@@ -90,7 +90,7 @@ const ContestLiveSolo = (props) => {
 
   const successBoulder = useCallback((event) => {
 
-    //if (moment().toDate() < contest.startAt) return false
+    if (dayjs().toDate() < contest.startAt) return false
 
     const idBoulder = parseInt(event.target.attributes.id.value);
     const idClimber = event.target.parentNode.attributes.id.value;

@@ -4,11 +4,11 @@ import styled from 'styled-components';
 const RegisterForm = ({className, ...props}) => <form className={className} {...props}></form>
 
 const RegisterFormStyled = styled(RegisterForm)`
-     width: 500px;
-     height: 600px;
+     width: 400px;
+     height: 450px;
      position: absolute;
-     top: 10%;
-     left: 10%;
+     top: 20%;
+     left: calc(50% - 200px);
      background: rgb(0, 0, 0, 0.65);
      display: flex;
      flex-direction: column;

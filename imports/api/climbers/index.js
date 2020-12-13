@@ -29,6 +29,7 @@ ClimbersSchema = new SimpleSchema(
     },{
     clean: {
         removeEmptyStrings: false, 
+        trimStrings: true,
     },
 });
 

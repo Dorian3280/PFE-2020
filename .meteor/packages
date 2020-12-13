@@ -22,5 +22,4 @@ accounts-base
 react-meteor-data
 accounts-password
 ostrio:flow-router-extra
-momentjs:moment
 aldeed:collection2
